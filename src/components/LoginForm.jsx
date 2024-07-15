@@ -6,10 +6,14 @@ function LoginForm() {
       <h3>Login</h3>
       <p>Please enter your username and password</p>
       <form>
-        <label htmlFor="username">Username:</label>
-        <input type="text" name="username" />
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password" />
+        <p>
+          <label htmlFor="username">Email: </label>
+          <input type="username" name="username" />
+        </p>
+        <p>
+          <label htmlFor="password">Password: </label>
+          <input type="password" name="password" />
+        </p>
         <button>Login</button>
       </form>
       <p>
