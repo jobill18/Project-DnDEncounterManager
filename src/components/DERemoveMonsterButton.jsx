@@ -1,7 +1,11 @@
 import React from "react";
 
 function DERemoveMonsterButton() {
-  return <div>DERemoveMonsterButton</div>;
+  return (
+    <td>
+      <button>Remove Monster</button>
+    </td>
+  );
 }
 
 export default DERemoveMonsterButton;
