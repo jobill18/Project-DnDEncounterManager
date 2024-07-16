@@ -8,9 +8,24 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+import SavedDetailed from "./components/SavedDetailed.jsx";
+import SavedPreview from "./components/SavedPreview.jsx";
+import GeneratedDetailed from "./components/GeneratedDetailed.jsx";
+import GeneratedPreview from "./components/GeneratedPreview.jsx";
+import LoginForm from "./components/LoginForm.jsx";
+import RegisterForm from "./components/RegisterForm.jsx";
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route path="/" element={<App />}></Route>)
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="/myencounters" element={<SavedPreview />} />
+      <Route path="/myencounters/:encounter_id" element={<SavedDetailed />} />
+      <Route path="/encounters" element={<GeneratedPreview />} />
+      <Route path="/encounters/:encounter_id" element={<GeneratedDetailed />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/register" element={<RegisterForm />} />
+    </Route>
+  )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
