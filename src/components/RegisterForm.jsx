@@ -26,7 +26,7 @@ function RegisterForm() {
           <input type="text" />
         </p>
         <p>
-          <button>Submit</button>
+          <button type="submit">Submit</button>
         </p>
       </form>
     </>

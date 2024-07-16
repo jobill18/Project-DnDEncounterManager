@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   return (
@@ -17,7 +18,7 @@ function LoginForm() {
         <button>Login</button>
       </form>
       <p>
-        Click <button>here</button> to create a new account.
+        Click <Link to="/register">here</Link> to create a new account.
       </p>
     </>
   );

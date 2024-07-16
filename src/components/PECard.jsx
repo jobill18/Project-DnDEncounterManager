@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function PECard() {
   return (
@@ -16,7 +17,9 @@ function PECard() {
       <tfoot>
         <tr>
           <td>
-            <button>View Encounter</button>
+            <button>
+              <Link to="/myencounters/:encounter_id">View Encounter</Link>
+            </button>
           </td>
         </tr>
       </tfoot>

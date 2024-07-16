@@ -1,5 +1,5 @@
 import React from "react";
-import DEMonsterSearchBar from "./DEMonsterSearchBar";
+import DEMonsterSearchBar from "./EditMonsterSearchBar";
 import DERemoveMonsterButton from "./DERemoveMonsterButton";
 
 function DEMonsterTable() {
@@ -16,13 +16,6 @@ function DEMonsterTable() {
           <DERemoveMonsterButton />
         </tr>
       </tbody>
-      <tfoot>
-        <tr>
-          <td>
-            <DEMonsterSearchBar />
-          </td>
-        </tr>
-      </tfoot>
     </table>
   );
 }

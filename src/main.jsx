@@ -14,6 +14,7 @@ import GeneratedDetailed from "./components/GeneratedDetailed.jsx";
 import GeneratedPreview from "./components/GeneratedPreview.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
+import EditEncounter from "./components/EditEncounter.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,10 @@ const router = createBrowserRouter(
       <Route path="/encounters/:encounter_id" element={<GeneratedDetailed />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
+      <Route
+        path="/myencounters/:encounter_id/edit"
+        element={<EditEncounter />}
+      />
     </Route>
   )
 );

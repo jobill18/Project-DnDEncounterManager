@@ -1,11 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function DEEditButtons() {
   return (
     <div>
-      <button>Edit</button>
-      <button>Save</button>
-      <button>Delete</button>
+      <button>
+        <Link to={"/myencounters/:encounter_id/edit"}>Edit</Link>
+      </button>
+      <button>
+        <Link to={"/myencounters"}>Delete</Link>
+      </button>
     </div>
   );
 }

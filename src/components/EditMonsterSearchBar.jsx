@@ -1,12 +1,11 @@
 import React from "react";
 
-function DEMonsterSearchBar() {
+function EditMonsterSearchBar() {
   return (
     <td>
       <input type="text" placeholder="find a monster" />
-      <button>Add Monster</button>
     </td>
   );
 }
 
-export default DEMonsterSearchBar;
+export default EditMonsterSearchBar;
