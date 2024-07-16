@@ -4,7 +4,7 @@ import EditMonsterSearchBar from "./EditMonsterSearchBar";
 import EditAddMonsterButton from "./EditAddMonsterButton";
 import DEMonsterTable from "./DEMonsterTable";
 
-function EditEncounter() {
+function EditEncounter({ data }) {
   return (
     <table>
       <thead>
@@ -23,7 +23,7 @@ function EditEncounter() {
       <tfoot>
         <tr>
           <td>
-            <EditMonsterSearchBar />
+            <EditMonsterSearchBar data={data} />
             <EditAddMonsterButton />
           </td>
         </tr>

@@ -2,11 +2,11 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar.jsx";
 
-function App() {
+function App(data) {
   return (
     <>
       <NavBar />
-      <Outlet />
+      <Outlet data={data} />
     </>
   );
 }
