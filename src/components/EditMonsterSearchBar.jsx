@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
-function EditMonsterSearchBar({ data }) {
+function EditMonsterSearchBar() {
+  const { monsters } = useLoaderData();
   const [value, setValue] = useState("");
 
   const onChange = (e) => {
@@ -16,12 +18,12 @@ function EditMonsterSearchBar({ data }) {
 
   // const onAdd = searchTerm;
 
-  console.log(data.results);
+  console.log(monsters.results);
 
   let monsterList;
 
   if (value) {
-    monsterList = data.results
+    monsterList = monsters.results
       .filter((item) => {
         console.log(item);
         const searchTerm = value.toLowerCase();
