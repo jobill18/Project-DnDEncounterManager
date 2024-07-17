@@ -114,7 +114,7 @@ app.put("/api/encounters/:encounterId", loginRequired, async (req, res) => {
     await encounter.save();
   } else {
     alert(
-      "You are not allowed to change this encounter. If you think you should be able to edit this encounter, try signing in to your account."
+      "You are not logged in. You may only edit an encounter if you are logged in."
     );
   }
   res.json(encounter);
@@ -130,12 +130,12 @@ app.delete("/api/encounters/:encounterId", loginRequired, async (req, res) => {
 
   if (user && encounter.userId === userId) {
     await encounter.destroy();
+    res.json({ success: true });
   } else {
     alert(
-      "You are not allowed to delete this encounter. If you think you should be able to delete this encounter, try signing in to your account."
+      "You are not logged in. You may only delete an encounter if you are logged in."
     );
   }
-  res.json(encounter);
 });
 
 //add monster with encounterId
@@ -153,12 +153,37 @@ app.post("/api/encounters/:encounterId", loginRequired, async (req, res) => {
     res.json(monster);
   } else {
     alert(
-      "You are not logged in. You may only create an encounter if you are logged in."
+      "You are not logged in. You may only edit an encounter if you are logged in."
     );
   }
 });
 
 //delete monster from encounter with encounterId
+app.delete(
+  "/api/encounters/:encounterId/:monsterId",
+  loginRequired,
+  async (req, res) => {
+    const { user } = req.session;
+    const { encounterId, monsterId } = req.params;
+    const userId = user.userId;
+
+    const encounter = await Monster.findByPk(encounterId);
+    const monster = await Monster.findByPk(monsterId);
+
+    if (
+      user &&
+      monster.encounterId === encounterId &&
+      encounter.userId === userId
+    ) {
+      await monster.destroy();
+      res.json({ success: true });
+    } else {
+      alert(
+        "You are not logged in. You may only delete an encounter if you are logged in."
+      );
+    }
+  }
+);
 
 //********************************END API endpoints************************************//
 
