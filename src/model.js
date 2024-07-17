@@ -3,7 +3,9 @@ import util from "util";
 import connectToDB from "./db.js";
 import { type } from "os";
 
-export const db = await connectToDB("postgres://josep:admin@localhost:5432/");
+export const db = await connectToDB(
+  "postgres://josep:admin@localhost:5432/encounters"
+);
 
 export class User extends Model {
   [util.inspect.custom]() {
@@ -32,12 +34,12 @@ User.init(
     },
     fname: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: false,
     },
     lname: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: false,
     },
     email: {
