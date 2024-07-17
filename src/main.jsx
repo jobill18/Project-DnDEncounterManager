@@ -18,8 +18,22 @@ import EditEncounter from "./components/EditEncounter.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/encounters" element={<Preview />} />
-      <Route path="/encounters/:encounter_id" element={<DetailedView />} />
+      <Route
+        path="/encounters"
+        element={<Preview />}
+        loader={async () => {
+          const res = await axios.get("/api/encounters");
+          return { encounters: res.data };
+        }}
+      />
+      <Route
+        path="/encounters/:encounter_id"
+        element={<DetailedView />}
+        loader={async () => {
+          const res = await axios.get("/api/encounters/:encounterId");
+          return { encounters: res.data };
+        }}
+      />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route
