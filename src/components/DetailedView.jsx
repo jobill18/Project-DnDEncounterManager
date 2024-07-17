@@ -1,8 +1,8 @@
 import React from "react";
 import DetailedEncounterTable from "./DetailedEncounterTable";
 
-function SavedDetailed() {
+function DetailedView() {
   return <DetailedEncounterTable />;
 }
 
-export default SavedDetailed;
+export default DetailedView;

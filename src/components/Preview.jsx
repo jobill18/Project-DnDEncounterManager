@@ -1,8 +1,8 @@
 import React from "react";
 import PreviewEncounterTable from "./PreviewEncounterTable";
 
-function SavedPreview() {
+function Preview() {
   return <PreviewEncounterTable />;
 }
 
-export default SavedPreview;
+export default Preview;
