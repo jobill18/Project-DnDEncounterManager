@@ -21,6 +21,15 @@ function DEMonsterTable({ monster }) {
 
   console.log(details);
 
+  // const actions =
+  //   details &&
+  //   details.actions.map((action) => {
+  //     <tr key={action.name}>
+  //       <td>{action.name}</td>
+  //       <td colSpan={5}>{action.desc}</td>
+  //     </tr>;
+  //   });
+
   return (
     details && (
       <table key={monster.monsterId}>
@@ -55,6 +64,7 @@ function DEMonsterTable({ monster }) {
             <td>{details.wisdom}</td>
             <td>{details.charisma}</td>
           </tr>
+          {/* {actions} */}
         </tbody>
       </table>
     )
