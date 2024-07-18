@@ -31,9 +31,11 @@ function loginRequired(req, res, next) {
 app.get("/api/encounters", async (req, res) => {
   const { user } = req.session;
 
-  const allEncounters = await Encounter.findAll({
-    where: { [Op.or]: [{ userId: user }, { userId: null }] },
-  });
+  // {
+  //   where: { [Op.or]: [{ userId: user }, { userId: null }] },
+  // }
+
+  const allEncounters = await Encounter.findAll();
   res.json(allEncounters);
 });
 
@@ -42,8 +44,11 @@ app.get("/api/encounters", async (req, res) => {
 //view encounter details
 app.get("/api/encounters/:encounterId", async (req, res) => {
   const { encounterId } = req.params;
+  const monsters = await Monster.findAll({
+    where: { encounterId: encounterId },
+  });
   const encounter = await Encounter.findByPk(encounterId);
-  res.json(encounter);
+  res.json({ monsters, encounter });
 });
 
 //login

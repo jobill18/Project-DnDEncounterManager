@@ -27,11 +27,14 @@ const router = createBrowserRouter(
         }}
       />
       <Route
-        path="/encounters/:encounter_id"
+        path="/encounters/:encounterId"
         element={<DetailedView />}
-        loader={async () => {
-          const res = await axios.get("/api/encounters/:encounterId");
-          return { encounters: res.data };
+        loader={async ({ params }) => {
+          const res = await axios.get(`/api/encounters/${params.encounterId}`);
+          return {
+            monsterEntries: res.data.monsters,
+            encounter: res.data.encounter,
+          };
         }}
       />
       <Route path="/login" element={<LoginForm />} />

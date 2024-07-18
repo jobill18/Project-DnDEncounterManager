@@ -1,7 +1,15 @@
 import React from "react";
 import PECard from "./PECard.jsx";
+import { Link } from "react-router-dom";
 
-function PreviewEncounterTable() {
+function PreviewEncounterTable(encounters) {
+  const encounterCards = encounters.map((encounter) => (
+    <div key={encounter.encounterId}>
+      <h1>{encounter.encounterName}</h1>
+      <Link to={`/encounters/${encounter.encounterId}`} />
+    </div>
+  ));
+
   return (
     <table>
       <thead>
@@ -10,9 +18,7 @@ function PreviewEncounterTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <PECard />
-        </tr>
+        <tr>{encounterCards}</tr>
       </tbody>
     </table>
   );

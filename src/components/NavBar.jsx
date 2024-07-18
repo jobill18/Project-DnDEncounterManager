@@ -1,13 +1,27 @@
+import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 function NavBar() {
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    const res = await axios.post("/api/logout");
+    if (res.data.success) {
+      navigate("/");
+    }
+  };
+
   return (
     <div>
       <h3>DnD Encounter Manager</h3>
-      <Link to="/myencounters">Saved Encounters</Link>
       <Link to="/encounters">Premade Encounters</Link>
-      <Link to="/login">Login</Link>
+      <button>
+        <Link to="/login">Login</Link>
+      </button>
+      <LogoutButton onLogout={handleLogout} />
       <Link to="/register">Register</Link>
     </div>
   );
