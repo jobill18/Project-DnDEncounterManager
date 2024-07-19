@@ -17,7 +17,7 @@ function NavBar() {
   return (
     <div>
       <h3>DnD Encounter Manager</h3>
-      <Link to="/encounters">Premade Encounters</Link>
+      <Link to="/encounters">Encounters</Link>
       <button>
         <Link to="/login">Login</Link>
       </button>

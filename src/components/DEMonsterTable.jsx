@@ -34,7 +34,7 @@ function DEMonsterTable({ monster }) {
           <tr>
             <td colSpan={2}>AC: {details.armor_class[0].value}</td>
             <td colSpan={2}>HP: {details.hit_points}</td>
-            <td colSpan={2}>speed: {details.speed.walk}</td>
+            <td colSpan={2}>Speed: {details.speed.walk}</td>
           </tr>
           <tr>
             <td>STR</td>
