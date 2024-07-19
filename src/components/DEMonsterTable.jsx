@@ -6,29 +6,17 @@ import { useState, useEffect } from "react";
 
 function DEMonsterTable({ monster }) {
   const [details, setDetails] = useState(null);
+
   useEffect(() => {
     monsterDetails();
   }, []);
 
   function monsterDetails() {
-    // const res = await axios.get(monster.monsterUrl);
-    // console.log(res);
-    // setDetails(res);
     axios.get(monster.monsterUrl).then((res) => {
       setDetails(res.data);
+      console.log(res.data);
     });
   }
-
-  console.log(details);
-
-  // const actions =
-  //   details &&
-  //   details.actions.map((action) => {
-  //     <tr key={action.name}>
-  //       <td>{action.name}</td>
-  //       <td colSpan={5}>{action.desc}</td>
-  //     </tr>;
-  //   });
 
   return (
     details && (
@@ -64,7 +52,26 @@ function DEMonsterTable({ monster }) {
             <td>{details.wisdom}</td>
             <td>{details.charisma}</td>
           </tr>
-          {/* {actions} */}
+          <tr>
+            <td>Features:</td>
+          </tr>
+          {details.special_abilities.map((feature) => (
+            <tr key={feature.name}>
+              <td colSpan={6}>
+                {feature.name}: {feature.desc}
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <td>Actions:</td>
+          </tr>
+          {details.actions.map((action) => (
+            <tr key={action.name}>
+              <td colSpan={6}>
+                {action.name}: {action.desc}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     )
