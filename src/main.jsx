@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -13,7 +13,8 @@ import DetailedView from "./components/DetailedView.jsx";
 import Preview from "./components/Preview.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
-import EditEncounter from "./components/EditEncounter.jsx";
+
+// const { isUser, setIsUser } = useState(false);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,23 +31,21 @@ const router = createBrowserRouter(
         path="/encounters/:encounterId"
         element={<DetailedView />}
         loader={async ({ params }) => {
-          const res = await axios.get(`/api/encounters/${params.encounterId}`);
+          const encounter = await axios.get(
+            `/api/encounters/${params.encounterId}`
+          );
+          const monsterData = await axios.get(
+            "https://www.dnd5eapi.co/api/monsters"
+          );
           return {
-            monsterEntries: res.data.monsters,
-            encounter: res.data.encounter,
+            monsterEntries: encounter.data.monsters,
+            encounter: encounter.data.encounter,
+            monsterData: monsterData.data,
           };
         }}
       />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
-      <Route
-        path="/encounters/:encounter_id/edit"
-        element={<EditEncounter />}
-        loader={async () => {
-          const res = await axios.get("https://www.dnd5eapi.co/api/monsters");
-          return { monsters: res.data };
-        }}
-      />
     </Route>
   )
 );

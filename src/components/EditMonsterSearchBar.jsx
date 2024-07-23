@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
-function EditMonsterSearchBar() {
-  const { monsters } = useLoaderData();
+function EditMonsterSearchBar({ isEditing }) {
+  const { monsterData } = useLoaderData();
   const [value, setValue] = useState("");
 
   const onChange = (e) => {
@@ -18,12 +18,12 @@ function EditMonsterSearchBar() {
 
   // const onAdd = searchTerm;
 
-  console.log(monsters.results);
+  console.log(monsterData.results);
 
   let monsterList;
 
   if (value) {
-    monsterList = monsters.results
+    monsterList = monsterData.results
       .filter((item) => {
         console.log(item);
         const searchTerm = value.toLowerCase();
@@ -42,16 +42,18 @@ function EditMonsterSearchBar() {
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="find a monster"
-        value={value}
-        onChange={onChange}
-      />
-      {/* <button onClick={() => onAdd(value)}>Add Monster</button> */}
-      <div className="dropdown">{monsterList}</div>
-    </div>
+    isEditing && (
+      <div>
+        <input
+          type="text"
+          placeholder="find a monster"
+          value={value}
+          onChange={onChange}
+        />
+        {/* <button onClick={() => onAdd(value)}>Add Monster</button> */}
+        <div className="dropdown">{monsterList}</div>
+      </div>
+    )
   );
 }
 

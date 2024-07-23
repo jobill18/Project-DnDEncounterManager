@@ -126,22 +126,26 @@ app.put("/api/encounters/:encounterId", loginRequired, async (req, res) => {
 });
 
 //delete encounter with encounterId
-app.delete("/api/encounters/:encounterId", loginRequired, async (req, res) => {
-  const { user } = req.session;
-  const { encounterId } = req.params;
-  const userId = user.userId;
+app.delete(
+  "/api/encounters/:encounterId/delete",
+  loginRequired,
+  async (req, res) => {
+    const { user } = req.session;
+    const { encounterId } = req.params;
+    const userId = user.userId;
 
-  const encounter = await Encounter.findByPk(encounterId);
+    const encounter = await Encounter.findByPk(encounterId);
 
-  if (user && encounter.userId === userId) {
-    await encounter.destroy();
-    res.json({ success: true });
-  } else {
-    alert(
-      "You are not logged in. You may only delete an encounter if you are logged in."
-    );
+    if (user && encounter.userId === userId) {
+      await encounter.destroy();
+      res.json({ success: true });
+    } else {
+      alert(
+        "You are not logged in. You may only delete an encounter if you are logged in."
+      );
+    }
   }
-});
+);
 
 //add monster with encounterId
 app.post("/api/encounters/:encounterId", loginRequired, async (req, res) => {

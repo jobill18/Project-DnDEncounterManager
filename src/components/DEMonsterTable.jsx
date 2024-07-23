@@ -1,10 +1,11 @@
 import axios from "axios";
 import React from "react";
-import DEMonsterSearchBar from "./EditMonsterSearchBar";
 import DERemoveMonsterButton from "./DERemoveMonsterButton";
 import { useState, useEffect } from "react";
+import EditMonsterSearchBar from "./EditMonsterSearchBar";
+import EditAddMonsterButton from "./EditAddMonsterButton";
 
-function DEMonsterTable({ monster }) {
+function DEMonsterTable({ monster, isEditing }) {
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
@@ -14,7 +15,6 @@ function DEMonsterTable({ monster }) {
   function monsterDetails() {
     axios.get(monster.monsterUrl).then((res) => {
       setDetails(res.data);
-      console.log(res.data);
     });
   }
 
@@ -72,7 +72,20 @@ function DEMonsterTable({ monster }) {
               </td>
             </tr>
           ))}
+          <tr>
+            <td colSpan={6}>
+              <DERemoveMonsterButton isEditing={isEditing} />
+            </td>
+          </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            {/* <td colSpan={6}>
+              <EditMonsterSearchBar data={data} />
+              <EditAddMonsterButton />
+            </td> */}
+          </tr>
+        </tfoot>
       </table>
     )
   );
