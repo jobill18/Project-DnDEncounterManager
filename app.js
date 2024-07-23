@@ -89,20 +89,14 @@ app.post("/api/logout", loginRequired, (req, res) => {
 
 //create new encounter with blank name
 app.post("/api/encounters", loginRequired, async (req, res) => {
-  const { user } = req.session;
-  const userId = user.userId;
+  const { userId } = req.session;
+  const { encounterName } = req.body;
 
-  if (user) {
-    const encounter = await Encounter.create({
-      encounterName: "",
-      userId: userId,
-    });
-    res.json(encounter);
-  } else {
-    alert(
-      "You are not logged in. You may only create an encounter if you are logged in."
-    );
-  }
+  const user = await User.findByPk(userId);
+  const encounter = await user.createEncounter({
+    encounterName: encounterName,
+  });
+  res.json(encounter);
 });
 
 //edit encounter name with encounterId
@@ -149,22 +143,15 @@ app.delete(
 
 //add monster with encounterId
 app.post("/api/encounters/:encounterId", loginRequired, async (req, res) => {
-  const { user } = req.session;
   const { encounterId } = req.params;
   const { monsterName, monsterUrl } = req.body;
 
-  if (user) {
-    const monster = await Monster.create({
-      monsterName: monsterName,
-      monsterUrl: monsterUrl,
-      encounterId: encounterId,
-    });
-    res.json(monster);
-  } else {
-    alert(
-      "You are not logged in. You may only edit an encounter if you are logged in."
-    );
-  }
+  const monster = await Monster.create({
+    monsterName: monsterName,
+    monsterUrl: monsterUrl,
+    encounterId: encounterId,
+  });
+  res.json(monster);
 });
 
 //delete monster from encounter with encounterId

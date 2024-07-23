@@ -1,10 +1,18 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
-function EditMonsterSearchBar({ isEditing }) {
+function EditMonsterSearchBar({
+  isEditing,
+  encounter,
+  monsterList,
+  setMonsterList,
+}) {
   const { monsterData } = useLoaderData();
   const [value, setValue] = useState("");
+
+  // console.log(encounter);
 
   const onChange = (e) => {
     setValue(e.target.value);
@@ -13,19 +21,19 @@ function EditMonsterSearchBar({ isEditing }) {
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
     // api search results
-    console.log("search", searchTerm);
+    // console.log("search", searchTerm);
   };
 
   // const onAdd = searchTerm;
 
-  console.log(monsterData.results);
+  // console.log(monsterData.results);
 
-  let monsterList;
+  let monsterDB;
 
   if (value) {
-    monsterList = monsterData.results
+    monsterDB = monsterData.results
       .filter((item) => {
-        console.log(item);
+        // console.log(item);
         const searchTerm = value.toLowerCase();
         const name = item.name.toLowerCase();
         return searchTerm && name.includes(searchTerm) && name !== searchTerm;
@@ -41,6 +49,22 @@ function EditMonsterSearchBar({ isEditing }) {
       ));
   }
 
+  const addMonster = async () => {
+    const monster = monsterData.results.filter((item) => {
+      return item.name === value;
+    });
+    console.log(monster);
+    const newMonster = await axios.post(
+      `/api/encounters/${encounter.encounterId}`,
+      {
+        monsterName: monster[0].name,
+        monsterUrl: `https://www.dnd5eapi.co${monster[0].url}`,
+      }
+    );
+    setValue("");
+    setMonsterList([...monsterList, newMonster.data]);
+  };
+
   return (
     isEditing && (
       <div>
@@ -50,8 +74,8 @@ function EditMonsterSearchBar({ isEditing }) {
           value={value}
           onChange={onChange}
         />
-        {/* <button onClick={() => onAdd(value)}>Add Monster</button> */}
-        <div className="dropdown">{monsterList}</div>
+        <button onClick={() => addMonster()}>Add Monster</button>
+        <div className="dropdown">{monsterDB}</div>
       </div>
     )
   );

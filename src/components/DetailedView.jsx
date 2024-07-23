@@ -12,8 +12,9 @@ function DetailedView() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [encounterName, setEncounterName] = useState(encounter.encounterName);
+  const [monsterList, setMonsterList] = useState(monsterEntries);
 
-  console.log(isEditing);
+  // console.log(isEditing);
 
   const setEditMode = () => setIsEditing(true);
   const setNormalMode = () => setIsEditing(false);
@@ -31,13 +32,18 @@ function DetailedView() {
   //   setIsEditing(false);
   // };
 
-  const monsterCards = monsterEntries.map((monster) => (
-    <DEMonsterTable
-      key={monster.monsterId}
-      monster={monster}
-      isEditing={isEditing}
-    />
-  ));
+  const monsterCards = monsterList.map(
+    (monster) => (
+      console.log(monster),
+      (
+        <DEMonsterTable
+          key={monster.monsterId}
+          monster={monster}
+          isEditing={isEditing}
+        />
+      )
+    )
+  );
 
   return (
     <div>
@@ -52,10 +58,14 @@ function DetailedView() {
         onSaveClick={setNormalMode}
       />
       {monsterCards}
-      <p>
-        <EditMonsterSearchBar isEditing={isEditing} />
-        <EditAddMonsterButton isEditing={isEditing} />
-      </p>
+
+      <EditMonsterSearchBar
+        isEditing={isEditing}
+        encounter={encounter}
+        monsterList={monsterList}
+        setMonsterList={setMonsterList}
+      />
+      {/* <EditAddMonsterButton isEditing={isEditing} /> */}
     </div>
   );
 }

@@ -14,9 +14,12 @@ function DEMonsterTable({ monster, isEditing }) {
 
   function monsterDetails() {
     axios.get(monster.monsterUrl).then((res) => {
+      // console.log(res.data);
       setDetails(res.data);
     });
   }
+
+  // console.log(details);
 
   return (
     details && (

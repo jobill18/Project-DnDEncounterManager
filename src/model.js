@@ -68,7 +68,7 @@ Encounter.init(
     encounterName: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
     },
   },
   {
