@@ -7,7 +7,6 @@ import EditAddMonsterButton from "./EditAddMonsterButton";
 
 function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
   const [details, setDetails] = useState(null);
-
   const { monsterId, encounterId } = monster;
 
   const removeMonster = async () => {

@@ -129,19 +129,15 @@ app.delete(
   "/api/encounters/:encounterId/delete",
   loginRequired,
   async (req, res) => {
-    const { user } = req.session;
+    const { userId } = req.session;
     const { encounterId } = req.params;
-    const userId = user.userId;
-
     const encounter = await Encounter.findByPk(encounterId);
 
-    if (user && encounter.userId === userId) {
+    if (encounter.userId === userId) {
       await encounter.destroy();
       res.json({ success: true });
     } else {
-      alert(
-        "You are not logged in. You may only delete an encounter if you are logged in."
-      );
+      res.json({ success: false });
     }
   }
 );
