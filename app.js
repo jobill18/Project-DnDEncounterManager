@@ -30,7 +30,6 @@ function loginRequired(req, res, next) {
 //view all encounters - extra functionality with login
 app.get("/api/encounters", async (req, res) => {
   const user = req.session.userId;
-  console.log(user);
   if (user) {
     const allEncounters = await Encounter.findAll({
       where: { [Op.or]: [{ userId: user }, { userId: null }] },

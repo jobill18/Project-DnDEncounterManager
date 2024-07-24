@@ -16,7 +16,6 @@ function DetailedView() {
   const navigate = useNavigate();
 
   const setEditMode = () => setIsEditing(true);
-  // const setNormalMode = () => setIsEditing(false);
   const setNormalMode = async () => {
     const encounter = await axios.put(`/api/encounters/${encounterId}`, {
       encounterName: encounterName,
