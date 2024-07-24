@@ -29,14 +29,19 @@ function loginRequired(req, res, next) {
 
 //view all encounters - extra functionality with login
 app.get("/api/encounters", async (req, res) => {
-  const { user } = req.session;
-
-  // {
-  //   where: { [Op.or]: [{ userId: user }, { userId: null }] },
-  // }
-
-  const allEncounters = await Encounter.findAll();
-  res.json(allEncounters);
+  const user = req.session.userId;
+  console.log(user);
+  if (user) {
+    const allEncounters = await Encounter.findAll({
+      where: { [Op.or]: [{ userId: user }, { userId: null }] },
+    });
+    res.json(allEncounters);
+  } else {
+    const sharedEncounters = await Encounter.findAll({
+      where: { userId: null },
+    });
+    res.json(sharedEncounters);
+  }
 });
 
 //---------------------------api endpoints - no authorization-----------------------------//
@@ -156,27 +161,20 @@ app.post("/api/encounters/:encounterId", loginRequired, async (req, res) => {
 
 //delete monster from encounter with encounterId
 app.delete(
-  "/api/encounters/:encounterId/:monsterId",
+  "/api/encounters/:encounterId/:monsterId/delete",
   loginRequired,
   async (req, res) => {
-    const { user } = req.session;
+    const { userId } = req.session;
     const { encounterId, monsterId } = req.params;
-    const userId = user.userId;
 
-    const encounter = await Monster.findByPk(encounterId);
+    const encounter = await Encounter.findByPk(encounterId);
     const monster = await Monster.findByPk(monsterId);
 
-    if (
-      user &&
-      monster.encounterId === encounterId &&
-      encounter.userId === userId
-    ) {
+    if (encounter.userId === userId) {
       await monster.destroy();
       res.json({ success: true });
     } else {
-      alert(
-        "You are not logged in. You may only delete an encounter if you are logged in."
-      );
+      res.json({ success: false });
     }
   }
 );

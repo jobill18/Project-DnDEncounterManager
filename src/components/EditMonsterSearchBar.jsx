@@ -12,28 +12,19 @@ function EditMonsterSearchBar({
   const { monsterData } = useLoaderData();
   const [value, setValue] = useState("");
 
-  // console.log(encounter);
-
   const onChange = (e) => {
     setValue(e.target.value);
   };
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    // api search results
-    // console.log("search", searchTerm);
   };
-
-  // const onAdd = searchTerm;
-
-  // console.log(monsterData.results);
 
   let monsterDB;
 
   if (value) {
     monsterDB = monsterData.results
       .filter((item) => {
-        // console.log(item);
         const searchTerm = value.toLowerCase();
         const name = item.name.toLowerCase();
         return searchTerm && name.includes(searchTerm) && name !== searchTerm;

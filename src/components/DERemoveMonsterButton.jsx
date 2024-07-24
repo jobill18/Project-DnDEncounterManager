@@ -1,7 +1,9 @@
 import React from "react";
 
-function DERemoveMonsterButton({ isEditing }) {
-  return isEditing && <button>Remove Monster</button>;
+function DERemoveMonsterButton({ isEditing, monsterId, removeMonster }) {
+  return (
+    isEditing && <button onClick={() => removeMonster()}>Remove Monster</button>
+  );
 }
 
 export default DERemoveMonsterButton;

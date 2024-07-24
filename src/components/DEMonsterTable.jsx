@@ -5,8 +5,22 @@ import { useState, useEffect } from "react";
 import EditMonsterSearchBar from "./EditMonsterSearchBar";
 import EditAddMonsterButton from "./EditAddMonsterButton";
 
-function DEMonsterTable({ monster, isEditing }) {
+function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
   const [details, setDetails] = useState(null);
+
+  const { monsterId, encounterId } = monster;
+
+  const removeMonster = async () => {
+    axios
+      .delete(`/api/encounters/${encounterId}/${monsterId}/delete`)
+      .then(() => {
+        const newMonsterListCopy = [...monsterList];
+        const newMonsterList = newMonsterListCopy.filter((monsterEntry) => {
+          return monsterEntry.monsterId !== +monsterId;
+        });
+        setMonsterList(newMonsterList);
+      });
+  };
 
   useEffect(() => {
     monsterDetails();
@@ -14,12 +28,9 @@ function DEMonsterTable({ monster, isEditing }) {
 
   function monsterDetails() {
     axios.get(monster.monsterUrl).then((res) => {
-      // console.log(res.data);
       setDetails(res.data);
     });
   }
-
-  // console.log(details);
 
   return (
     details && (
@@ -77,18 +88,14 @@ function DEMonsterTable({ monster, isEditing }) {
           ))}
           <tr>
             <td colSpan={6}>
-              <DERemoveMonsterButton isEditing={isEditing} />
+              <DERemoveMonsterButton
+                isEditing={isEditing}
+                removeMonster={removeMonster}
+                monsterId={monsterId}
+              />
             </td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
-            {/* <td colSpan={6}>
-              <EditMonsterSearchBar data={data} />
-              <EditAddMonsterButton />
-            </td> */}
-          </tr>
-        </tfoot>
       </table>
     )
   );
