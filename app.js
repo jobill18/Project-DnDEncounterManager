@@ -106,20 +106,15 @@ app.post("/api/encounters", loginRequired, async (req, res) => {
 
 //edit encounter name with encounterId
 app.put("/api/encounters/:encounterId", loginRequired, async (req, res) => {
-  const { user } = req.session;
+  const { userId } = req.session;
   const { encounterId } = req.params;
   const { encounterName } = req.body;
-  const userId = user.userId;
 
   const encounter = await Encounter.findByPk(encounterId);
 
-  if (user && encounter.userId === userId) {
+  if (encounter.userId === userId) {
     encounter.encounterName = encounterName;
     await encounter.save();
-  } else {
-    alert(
-      "You are not logged in. You may only edit an encounter if you are logged in."
-    );
   }
   res.json(encounter);
 });

@@ -16,20 +16,14 @@ function DetailedView() {
   const navigate = useNavigate();
 
   const setEditMode = () => setIsEditing(true);
-  const setNormalMode = () => setIsEditing(false);
-  // const setNormalMode = async () => {
-  //   const { encounter } = await axios.put(
-  //     `/api/encounters/${encounter.encounterId}`,
-  //     {
-  //       encounterName,
-  //     }
-  //   );
-
-  //   if (!encounter.error) {
-  //     setEncounterName(encounter.encounterName);
-  //   }
-  //   setIsEditing(false);
-  // };
+  // const setNormalMode = () => setIsEditing(false);
+  const setNormalMode = async () => {
+    const encounter = await axios.put(`/api/encounters/${encounterId}`, {
+      encounterName: encounterName,
+    });
+    console.log(encounter);
+    setIsEditing(false);
+  };
 
   const deleteEncounter = async () => {
     axios.delete(`/api/encounters/${encounterId}/delete`).then(() => {
