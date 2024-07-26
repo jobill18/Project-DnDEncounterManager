@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 function LoginForm() {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [user, setUser] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e, formData) => {
@@ -14,9 +15,12 @@ function LoginForm() {
     const res = await axios.post("/api/auth", formData);
 
     if (res.data.success) {
+      setUser(res.data.userId);
       navigate("/encounters");
     }
   };
+
+  console.log(user);
 
   return (
     <>

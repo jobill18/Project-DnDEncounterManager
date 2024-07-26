@@ -63,7 +63,7 @@ app.post("/api/auth", async (req, res) => {
   });
   if (user && user.password === password) {
     req.session.userId = user.userId;
-    res.json({ success: true });
+    res.json({ success: true, userId: req.session.userId });
   } else {
     res.json({ success: false });
   }
