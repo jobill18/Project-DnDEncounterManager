@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
-// import store from "./reducers/store.js";
+import store from "./reducers/store.js";
 import App from "./App.jsx";
 import "./index.css";
 import {
@@ -14,13 +14,13 @@ import DetailedView from "./components/DetailedView.jsx";
 import Preview from "./components/Preview.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
+import Homepage from "./components/Homepage.jsx";
 import { Provider } from "react-redux";
-
-// const { isUser, setIsUser } = useState(false);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      <Route path="/" element={Homepage} />
       <Route
         path="/encounters"
         element={<Preview />}
@@ -54,8 +54,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
-    <RouterProvider router={router} />
-    {/* </Provider> */}
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

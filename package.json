@@ -12,6 +12,7 @@
     "seed": "node scripts/seed.js"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.2",
     "express": "^4.19.2",
     "express-session": "^1.17.3",

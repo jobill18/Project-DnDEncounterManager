@@ -2,11 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const [user, setUser] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e, formData) => {
@@ -15,12 +16,12 @@ function LoginForm() {
     const res = await axios.post("/api/auth", formData);
 
     if (res.data.success) {
-      setUser(res.data.userId);
+      dispatch({ type: "SET_USER", payload: res.data.userId });
       navigate("/encounters");
     }
   };
 
-  console.log(user);
+  // const user = userReducer();
 
   return (
     <>

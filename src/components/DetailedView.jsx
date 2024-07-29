@@ -6,8 +6,10 @@ import EditSaveEncounterButton from "./EditSaveEncounterButton";
 import EditMonsterSearchBar from "./EditMonsterSearchBar";
 import EditAddMonsterButton from "./EditAddMonsterButton";
 import EditEncounterName from "./EditEncounterName";
+import { useSelector } from "react-redux";
 
 function DetailedView() {
+  const user = useSelector((state) => state.user);
   const { monsterEntries, encounter } = useLoaderData();
   const [isEditing, setIsEditing] = useState(false);
   const [encounterName, setEncounterName] = useState(encounter.encounterName);
@@ -41,7 +43,7 @@ function DetailedView() {
     />
   ));
 
-  return (
+  return user && user === encounter.userId ? (
     <div>
       <EditEncounterName
         value={encounterName}
@@ -61,6 +63,11 @@ function DetailedView() {
         monsterList={monsterList}
         setMonsterList={setMonsterList}
       />
+    </div>
+  ) : (
+    <div>
+      <h2>{encounterName}</h2>
+      {monsterCards}
     </div>
   );
 }

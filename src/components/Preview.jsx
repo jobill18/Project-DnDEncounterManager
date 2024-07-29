@@ -2,10 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import PreviewEncounterTable from "./PreviewEncounterTable";
 import { useLoaderData, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Preview() {
+  const user = useSelector((state) => state.user);
   const { encounters } = useLoaderData();
   const [displayEnc, setDisplayEnc] = useState(encounters);
+
+  console.log(user);
 
   const encounterCards = displayEnc.map((encounter) => (
     <tr key={encounter.encounterId}>
@@ -26,7 +30,7 @@ function Preview() {
     setDisplayEnc([...displayEnc, data]);
   };
 
-  return (
+  return user ? (
     <table>
       <thead>
         <tr>
@@ -35,6 +39,17 @@ function Preview() {
             <button type="sumbit" onClick={addEncounter}>
               Add Encounter
             </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>{encounterCards}</tbody>
+    </table>
+  ) : (
+    <table>
+      <thead>
+        <tr>
+          <th colSpan={2}>
+            <h1>Encounters</h1>
           </th>
         </tr>
       </thead>
