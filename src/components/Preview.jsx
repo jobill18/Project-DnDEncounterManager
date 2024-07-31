@@ -8,6 +8,7 @@ function Preview() {
   const user = useSelector((state) => state.user);
   const { encounters } = useLoaderData();
   const [displayEnc, setDisplayEnc] = useState(encounters);
+  const [isLoading, setIsLoading] = useState(false);
 
   console.log(user);
 
@@ -23,27 +24,33 @@ function Preview() {
   ));
 
   const addEncounter = async () => {
+    setIsLoading(true);
     const { data } = await axios.post("/api/encounters", {
       encounterName: "New Encounter new",
     });
     console.log(data);
     setDisplayEnc([...displayEnc, data]);
+    setIsLoading(false);
   };
 
   return user ? (
-    <table>
-      <thead>
-        <tr>
-          <th colSpan={2}>
-            <h1>Encounters</h1>
-            <button type="sumbit" onClick={addEncounter}>
-              Add Encounter
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>{encounterCards}</tbody>
-    </table>
+    !isLoading ? (
+      <table>
+        <thead>
+          <tr>
+            <th colSpan={2}>
+              <h1>Encounters</h1>
+              <button type="sumbit" onClick={addEncounter}>
+                Add Encounter
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>{encounterCards}</tbody>
+      </table>
+    ) : (
+      <h3>Loading Encounters...</h3>
+    )
   ) : (
     <table>
       <thead>

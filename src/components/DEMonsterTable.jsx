@@ -7,9 +7,11 @@ import EditAddMonsterButton from "./EditAddMonsterButton";
 
 function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
   const [details, setDetails] = useState(null);
-  const { monsterId, encounterId } = monster;
+  const { monsterName, monsterId, encounterId } = monster;
+  const [isLoading, setIsLoading] = useState(false);
 
   const removeMonster = async () => {
+    setIsLoading(true);
     axios
       .delete(`/api/encounters/${encounterId}/${monsterId}/delete`)
       .then(() => {
@@ -18,7 +20,9 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
           return monsterEntry.monsterId !== +monsterId;
         });
         setMonsterList(newMonsterList);
+        alert(`${monsterName} has been removed from the encounter.`);
       });
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -32,7 +36,8 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
   }
 
   return (
-    details && (
+    details &&
+    (!isLoading ? (
       <table key={monster.monsterId}>
         <thead>
           <tr>
@@ -96,7 +101,9 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
           </tr>
         </tbody>
       </table>
-    )
+    ) : (
+      <h3>Removing Monster...</h3>
+    ))
   );
 }
 

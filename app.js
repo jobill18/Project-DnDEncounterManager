@@ -73,14 +73,22 @@ app.post("/api/auth", async (req, res) => {
 app.post("/api/user", async (req, res) => {
   const { fname, lname, email, password } = req.body;
 
-  const user = await User.create({
-    fname: fname,
-    lname: lname,
-    email: email,
-    password: password,
+  const userEmail = await User.findOne({
+    where: { email: email },
   });
 
-  res.json(user);
+  if (!userEmail) {
+    const user = await User.create({
+      fname: fname,
+      lname: lname,
+      email: email,
+      password: password,
+    });
+
+    res.json(user);
+  } else {
+    res.json({ error: "Email already in use." });
+  }
 });
 
 //-------------------api endpoints that require authorization--------------------------//

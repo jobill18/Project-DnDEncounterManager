@@ -8,28 +8,43 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  const isEmailValid = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    if (!isEmailValid(value)) {
+      setError("Invalid email format.");
+    } else {
+      setError("");
+    }
+  };
 
   const createUser = async (event) => {
     event.preventDefault();
 
-    if (email.includes("@") && password === password2) {
+    if (!error && password === password2) {
       const { data } = await axios.post("/api/user", {
         fname: fname,
         lname: lname,
         email: email,
         password: password,
       });
-      console.log(data);
       if (!data.error) {
         navigate("/login");
       } else {
-        // console.log(data);
-        // alert(data.error);
+        alert(data.error);
       }
     } else {
-      if (!email.includes("@")) {
+      if (error) {
         alert("Please enter a valid email.");
       } else if (password !== password) {
         alert("Make sure your password is the same in both fields.");
@@ -65,7 +80,7 @@ function RegisterForm() {
             name="email"
             type="text"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
           />
         </p>
         <p>

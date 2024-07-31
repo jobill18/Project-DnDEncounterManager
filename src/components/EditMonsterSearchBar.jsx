@@ -11,6 +11,7 @@ function EditMonsterSearchBar({
 }) {
   const { monsterData } = useLoaderData();
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onChange = (e) => {
     setValue(e.target.value);
@@ -41,6 +42,7 @@ function EditMonsterSearchBar({
   }
 
   const addMonster = async () => {
+    setLoading(true);
     const monster = monsterData.results.filter((item) => {
       return item.name === value;
     });
@@ -54,10 +56,12 @@ function EditMonsterSearchBar({
     );
     setValue("");
     setMonsterList([...monsterList, newMonster.data]);
+    setLoading(false);
   };
 
   return (
-    isEditing && (
+    isEditing &&
+    (!loading ? (
       <div>
         <input
           type="text"
@@ -68,7 +72,9 @@ function EditMonsterSearchBar({
         <button onClick={() => addMonster()}>Add Monster</button>
         <div className="dropdown">{monsterDB}</div>
       </div>
-    )
+    ) : (
+      <div>Finding Monster...</div>
+    ))
   );
 }
 
