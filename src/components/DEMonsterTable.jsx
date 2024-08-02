@@ -42,7 +42,7 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
           <Col>
             <h3>{monster.monsterName}</h3>
           </Col>
-          <Col>CR: {details.challenge_rating}</Col>
+          <Col xs="3">CR: {details.challenge_rating}</Col>
         </Row>
         <Row>
           <Col>AC: {details.armor_class[0].value}</Col>
