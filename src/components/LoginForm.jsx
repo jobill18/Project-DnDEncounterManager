@@ -3,6 +3,7 @@ import { useState } from "react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -21,12 +22,18 @@ function LoginForm() {
     }
   };
 
-  // const user = userReducer();
-
   return (
-    <>
-      <h3>Login</h3>
-      <p>Please enter your username and password</p>
+    <Container fluid>
+      <Row>
+        <Col>
+          <h3>Login</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <p>Please enter your username and password</p>
+        </Col>
+      </Row>
       <form
         onSubmit={(e) => {
           handleLogin(e, {
@@ -53,10 +60,14 @@ function LoginForm() {
         />
         <button type="submit">Log In</button>
       </form>
-      <p>
-        Click <Link to="/register">here</Link> to create a new account.
-      </p>
-    </>
+      <Row>
+        <Col>
+          <p>
+            Click <Link to="/register">here</Link> to create a new account.
+          </p>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

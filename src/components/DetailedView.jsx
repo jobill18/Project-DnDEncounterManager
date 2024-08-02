@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useLoaderData, Link, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import DEMonsterTable from "./DEMonsterTable";
 import EditSaveEncounterButton from "./EditSaveEncounterButton";
 import EditMonsterSearchBar from "./EditMonsterSearchBar";
-import EditAddMonsterButton from "./EditAddMonsterButton";
 import EditEncounterName from "./EditEncounterName";
 import { useSelector } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
 
 function DetailedView() {
   const user = useSelector((state) => state.user);
@@ -45,17 +45,23 @@ function DetailedView() {
 
   return user && user === encounter.userId ? (
     <div>
-      <EditEncounterName
-        value={encounterName}
-        isEditing={isEditing}
-        onValueChange={setEncounterName}
-      />
-      <EditSaveEncounterButton
-        isEditing={isEditing}
-        onEditClick={setEditMode}
-        onSaveClick={setNormalMode}
-        onDeleteClick={deleteEncounter}
-      />
+      <Container fluid>
+        <Row>
+          <Col>
+            <EditEncounterName
+              value={encounterName}
+              isEditing={isEditing}
+              onValueChange={setEncounterName}
+            />
+          </Col>
+          <EditSaveEncounterButton
+            isEditing={isEditing}
+            onEditClick={setEditMode}
+            onSaveClick={setNormalMode}
+            onDeleteClick={deleteEncounter}
+          />
+        </Row>
+      </Container>
       {monsterCards}
       <EditMonsterSearchBar
         isEditing={isEditing}
@@ -66,7 +72,13 @@ function DetailedView() {
     </div>
   ) : (
     <div>
-      <h2>{encounterName}</h2>
+      <Container fluid>
+        <Row>
+          <Col>
+            <h2>{encounterName}</h2>
+          </Col>
+        </Row>
+      </Container>
       {monsterCards}
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Col } from "react-bootstrap";
 
 function EditSaveEncounterButton({
   isEditing,
@@ -8,12 +8,14 @@ function EditSaveEncounterButton({
   onDeleteClick,
 }) {
   return !isEditing ? (
-    <button onClick={onEditClick}>Edit</button>
+    <Col>
+      <button onClick={onEditClick}>Edit</button>
+    </Col>
   ) : (
-    <>
+    <Col>
       <button onClick={onSaveClick}>Save</button>
       <button onClick={onDeleteClick}>Delete Encounter</button>
-    </>
+    </Col>
   );
 }
 

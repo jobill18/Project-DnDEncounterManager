@@ -2,8 +2,7 @@ import axios from "axios";
 import React from "react";
 import DERemoveMonsterButton from "./DERemoveMonsterButton";
 import { useState, useEffect } from "react";
-import EditMonsterSearchBar from "./EditMonsterSearchBar";
-import EditAddMonsterButton from "./EditAddMonsterButton";
+import { Container, Row, Col } from "react-bootstrap";
 
 function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
   const [details, setDetails] = useState(null);
@@ -38,69 +37,64 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
   return (
     details &&
     (!isLoading ? (
-      <table key={monster.monsterId}>
-        <thead>
-          <tr>
-            <th colSpan={4}>
-              <h3>{monster.monsterName}</h3>
-            </th>
-            <th>CR:</th>
-            <th>{details.challenge_rating}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colSpan={2}>AC: {details.armor_class[0].value}</td>
-            <td colSpan={2}>HP: {details.hit_points}</td>
-            <td colSpan={2}>Speed: {details.speed.walk}</td>
-          </tr>
-          <tr>
-            <td>STR</td>
-            <td>DEX</td>
-            <td>CON</td>
-            <td>INT</td>
-            <td>WIS</td>
-            <td>CHA</td>
-          </tr>
-          <tr>
-            <td>{details.strength}</td>
-            <td>{details.dexterity}</td>
-            <td>{details.constitution}</td>
-            <td>{details.intelligence}</td>
-            <td>{details.wisdom}</td>
-            <td>{details.charisma}</td>
-          </tr>
-          <tr>
-            <td>Features:</td>
-          </tr>
-          {details.special_abilities.map((feature) => (
-            <tr key={feature.name}>
-              <td colSpan={6}>
-                {feature.name}: {feature.desc}
-              </td>
-            </tr>
-          ))}
-          <tr>
-            <td>Actions:</td>
-          </tr>
-          {details.actions.map((action) => (
-            <tr key={action.name}>
-              <td colSpan={6}>
-                {action.name}: {action.desc}
-              </td>
-            </tr>
-          ))}
-          <tr>
-            <td colSpan={6}>
-              <DERemoveMonsterButton
-                isEditing={isEditing}
-                removeMonster={removeMonster}
-                monsterId={monsterId}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <Container key={monster.monsterId}>
+        <Row>
+          <Col>
+            <h3>{monster.monsterName}</h3>
+          </Col>
+          <Col>CR: {details.challenge_rating}</Col>
+        </Row>
+        <Row>
+          <Col>AC: {details.armor_class[0].value}</Col>
+          <Col>HP: {details.hit_points}</Col>
+          <Col>Speed: {details.speed.walk}</Col>
+        </Row>
+        <Row>
+          <Col>STR</Col>
+          <Col>DEX</Col>
+          <Col>CON</Col>
+          <Col>INT</Col>
+          <Col>WIS</Col>
+          <Col>CHA</Col>
+        </Row>
+        <Row>
+          <Col>{details.strength}</Col>
+          <Col>{details.dexterity}</Col>
+          <Col>{details.constitution}</Col>
+          <Col>{details.intelligence}</Col>
+          <Col>{details.wisdom}</Col>
+          <Col>{details.charisma}</Col>
+        </Row>
+        <Row>
+          <Col>Features:</Col>
+        </Row>
+        {details.special_abilities.map((feature) => (
+          <Row key={feature.name}>
+            <Col>
+              {feature.name}: {feature.desc}
+            </Col>
+          </Row>
+        ))}
+        <Row>
+          <Col>Actions:</Col>
+        </Row>
+        {details.actions.map((action) => (
+          <Row key={action.name}>
+            <Col>
+              {action.name}: {action.desc}
+            </Col>
+          </Row>
+        ))}
+        <Row>
+          <Col>
+            <DERemoveMonsterButton
+              isEditing={isEditing}
+              removeMonster={removeMonster}
+              monsterId={monsterId}
+            />
+          </Col>
+        </Row>
+      </Container>
     ) : (
       <h3>Removing Monster...</h3>
     ))

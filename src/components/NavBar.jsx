@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import LogoutButton from "./LogoutButton";
 import { useDispatch, useSelector } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
 
 function NavBar() {
   const user = useSelector((state) => state.user);
@@ -19,22 +19,38 @@ function NavBar() {
   };
 
   return user ? (
-    <div>
-      <h3>DnD Encounter Manager</h3>
-      <Link to="/encounters">Encounters</Link>
-      <button onClick={handleLogout}>
-        <Link to="/">Log Out</Link>
-      </button>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col xs="3">
+          <h3>DnD Encounter Manager</h3>
+        </Col>
+        <Col xs="2">
+          <Link to="/encounters">Encounters</Link>
+        </Col>
+        <Col xs="4"></Col>
+        <Col xs="3">
+          <button onClick={handleLogout}>Log Out</button>
+        </Col>
+      </Row>
+    </Container>
   ) : (
-    <div>
-      <h3>DnD Encounter Manager</h3>
-      <Link to="/encounters">Encounters</Link>
-      <button>
-        <Link to="/login">Login</Link>
-      </button>
-      <Link to="/register">Register</Link>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col>
+          <h3>DnD Encounter Manager</h3>
+        </Col>
+        <Col>
+          <Link to="/encounters">Encounters</Link>
+        </Col>
+        <Col xs="4"></Col>
+        <Col>
+          <Link to="/login">Login</Link>
+        </Col>
+        <Col>
+          <Link to="/register">Register</Link>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

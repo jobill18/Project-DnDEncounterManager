@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import PreviewEncounterTable from "./PreviewEncounterTable";
 import { useLoaderData, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
 
 function Preview() {
   const user = useSelector((state) => state.user);
@@ -13,14 +13,14 @@ function Preview() {
   console.log(user);
 
   const encounterCards = displayEnc.map((encounter) => (
-    <tr key={encounter.encounterId}>
-      <td>
+    <Row key={encounter.encounterId}>
+      <Col xs="8">
         <h3>{encounter.encounterName}</h3>
-      </td>
-      <td>
+      </Col>
+      <Col>
         <Link to={`/encounters/${encounter.encounterId}`}>View Details</Link>
-      </td>
-    </tr>
+      </Col>
+    </Row>
   ));
 
   const addEncounter = async () => {
@@ -35,33 +35,31 @@ function Preview() {
 
   return user ? (
     !isLoading ? (
-      <table>
-        <thead>
-          <tr>
-            <th colSpan={2}>
-              <h1>Encounters</h1>
-              <button type="sumbit" onClick={addEncounter}>
-                Add Encounter
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>{encounterCards}</tbody>
-      </table>
+      <Container fluid>
+        <Row>
+          <Col xs="8">
+            <h1>Encounters</h1>
+          </Col>
+          <Col xs="4">
+            <button type="sumbit" onClick={addEncounter}>
+              Add Encounter
+            </button>
+          </Col>
+        </Row>
+        {encounterCards}
+      </Container>
     ) : (
       <h3>Loading Encounters...</h3>
     )
   ) : (
-    <table>
-      <thead>
-        <tr>
-          <th colSpan={2}>
-            <h1>Encounters</h1>
-          </th>
-        </tr>
-      </thead>
-      <tbody>{encounterCards}</tbody>
-    </table>
+    <Container fluid>
+      <Row>
+        <Col xs="8">
+          <h1>Encounters</h1>
+        </Col>
+      </Row>
+      {encounterCards}
+    </Container>
   );
 }
 

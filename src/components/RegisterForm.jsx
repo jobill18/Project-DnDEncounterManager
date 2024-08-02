@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
@@ -46,15 +47,19 @@ function RegisterForm() {
     } else {
       if (error) {
         alert("Please enter a valid email.");
-      } else if (password !== password) {
+      } else if (password !== password2) {
         alert("Make sure your password is the same in both fields.");
       }
     }
   };
 
   return (
-    <>
-      <h3>Create Account</h3>
+    <Container fluid>
+      <Row>
+        <Col>
+          <h3>Create Account</h3>
+        </Col>
+      </Row>
       <form onSubmit={(e) => createUser(e)}>
         <p>
           <label htmlFor="fname">First Name: </label>
@@ -105,7 +110,7 @@ function RegisterForm() {
           <button type="submit">Submit</button>
         </p>
       </form>
-    </>
+    </Container>
   );
 }
 

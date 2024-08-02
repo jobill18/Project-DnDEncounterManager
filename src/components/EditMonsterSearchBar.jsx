@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 
 function EditMonsterSearchBar({
@@ -31,13 +32,11 @@ function EditMonsterSearchBar({
         return searchTerm && name.includes(searchTerm) && name !== searchTerm;
       })
       .map((item) => (
-        <div
-          onClick={() => onSearch(item.name)}
-          className="dropdown-row"
-          key={item.index}
-        >
-          {item.name}
-        </div>
+        <Row key={item.index}>
+          <Col onClick={() => onSearch(item.name)} className="droColdown-row">
+            {item.name}
+          </Col>
+        </Row>
       ));
   }
 
@@ -62,18 +61,30 @@ function EditMonsterSearchBar({
   return (
     isEditing &&
     (!loading ? (
-      <div>
-        <input
-          type="text"
-          placeholder="find a monster"
-          value={value}
-          onChange={onChange}
-        />
-        <button onClick={() => addMonster()}>Add Monster</button>
+      <Container fluid>
+        <Row>
+          <Col>
+            <input
+              type="text"
+              placeholder="find a monster"
+              value={value}
+              onChange={onChange}
+            />
+          </Col>
+          <Col>
+            <button onClick={() => addMonster()}>Add Monster</button>
+          </Col>
+        </Row>
         <div className="dropdown">{monsterDB}</div>
-      </div>
+      </Container>
     ) : (
-      <div>Finding Monster...</div>
+      <Container fluid>
+        <Row>
+          <Col>
+            <h3>Finding Monster...</h3>
+          </Col>
+        </Row>
+      </Container>
     ))
   );
 }
