@@ -26,7 +26,7 @@ function Preview() {
   const addEncounter = async () => {
     setIsLoading(true);
     const { data } = await axios.post("/api/encounters", {
-      encounterName: "New Encounter new",
+      encounterName: "New Encounter",
     });
     console.log(data);
     setDisplayEnc([...displayEnc, data]);
