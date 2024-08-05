@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
@@ -60,56 +60,62 @@ function RegisterForm() {
           <h3>Create Account</h3>
         </Col>
       </Row>
-      <form onSubmit={(e) => createUser(e)}>
-        <p>
-          <label htmlFor="fname">First Name: </label>
-          <input
+      <Form onSubmit={(e) => createUser(e)}>
+        <Form.Group className="register" controlId="fname">
+          <Form.Label>First Name: </Form.Label>
+          <Form.Control
             name="fname"
+            id="fname"
             type="text"
             value={fname}
             onChange={(e) => setFname(e.target.value)}
           />
-        </p>
-        <p>
-          <label htmlFor="lname">Last Name: </label>
-          <input
+        </Form.Group>
+        <Form.Group className="register" controlId="lname">
+          <Form.Label>Last Name: </Form.Label>
+          <Form.Control
             name="lname"
+            id="lname"
             type="text"
             value={lname}
             onChange={(e) => setLname(e.target.value)}
           />
-        </p>
-        <p>
-          <label htmlFor="email">Email: </label>
-          <input
+        </Form.Group>
+        <Form.Group className="register" controlId="email">
+          <Form.Label>Email: </Form.Label>
+          <Form.Control
             name="email"
+            id="email"
             type="text"
             value={email}
+            required
             onChange={handleEmailChange}
           />
-        </p>
-        <p>
-          <label htmlFor="password">Password: </label>
-          <input
+        </Form.Group>
+        <Form.Group className="register" controlId="password">
+          <Form.Label>Password: </Form.Label>
+          <Form.Control
             name="password"
+            id="password"
             type="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
-        </p>
-        <p>
-          <label htmlFor="password2">Re-enter Password: </label>
-          <input
+        </Form.Group>
+        <Form.Group className="register" controlId="password2">
+          <Form.Label>Re-enter Password: </Form.Label>
+          <Form.Control
             name="password2"
+            id="password2"
             type="password"
             value={password2}
+            required
             onChange={(e) => setPassword2(e.target.value)}
           />
-        </p>
-        <p>
-          <button type="submit">Submit</button>
-        </p>
-      </form>
+        </Form.Group>
+        <Button type="submit">Submit</Button>
+      </Form>
     </Container>
   );
 }

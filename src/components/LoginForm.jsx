@@ -3,7 +3,7 @@ import { useState } from "react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function LoginForm() {
           <p>Please enter your username and password</p>
         </Col>
       </Row>
-      <form
+      <Form
         onSubmit={(e) => {
           handleLogin(e, {
             email: emailValue,
@@ -42,24 +42,28 @@ function LoginForm() {
           });
         }}
       >
-        <label htmlFor="email">Email:</label>
-        <input
-          name="email"
-          id="email"
-          type="text"
-          required
-          onChange={(e) => setEmailValue(e.target.value)}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          name="password"
-          id="password"
-          type="password"
-          required
-          onChange={(e) => setPasswordValue(e.target.value)}
-        />
-        <button type="submit">Log In</button>
-      </form>
+        <Form.Group className="login" controlId="email">
+          <Form.Label>Email: </Form.Label>
+          <Form.Control
+            name="email"
+            id="email"
+            type="email"
+            required
+            onChange={(e) => setEmailValue(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="login" controlId="password">
+          <Form.Label>Password: </Form.Label>
+          <Form.Control
+            name="password"
+            id="password"
+            type="password"
+            required
+            onChange={(e) => setPasswordValue(e.target.value)}
+          />
+        </Form.Group>
+        <Button type="submit">Log In</Button>
+      </Form>
       <Row>
         <Col>
           <p>

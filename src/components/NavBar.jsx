@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
+import { Nav, Button } from "react-bootstrap";
 
 function NavBar() {
   const user = useSelector((state) => state.user);
@@ -19,38 +19,32 @@ function NavBar() {
   };
 
   return user ? (
-    <Container fluid>
-      <Row>
-        <Col xs="3">
-          <h3>DnD Encounter Manager</h3>
-        </Col>
-        <Col xs="2">
-          <Link to="/encounters">Encounters</Link>
-        </Col>
-        <Col xs="4"></Col>
-        <Col xs="3">
-          <button onClick={handleLogout}>Log Out</button>
-        </Col>
-      </Row>
-    </Container>
+    <Nav variant="tabs" defaultActiveKey="/">
+      <Nav.Item>
+        <Nav.Link href="/">DnD Encounter Manager</Nav.Link>
+      </Nav.Item>
+      <Nav.Item xs="6">
+        <Nav.Link href="/encounters">Encounters</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Button onClick={handleLogout}>Log Out</Button>
+      </Nav.Item>
+    </Nav>
   ) : (
-    <Container fluid>
-      <Row>
-        <Col>
-          <h3>DnD Encounter Manager</h3>
-        </Col>
-        <Col>
-          <Link to="/encounters">Encounters</Link>
-        </Col>
-        <Col xs="4"></Col>
-        <Col>
-          <Link to="/login">Login</Link>
-        </Col>
-        <Col>
-          <Link to="/register">Register</Link>
-        </Col>
-      </Row>
-    </Container>
+    <Nav variant="tabs" defaultActiveKey="/">
+      <Nav.Item>
+        <Nav.Link href="/">DnD Encounter Manager</Nav.Link>
+      </Nav.Item>
+      <Nav.Item xs="5">
+        <Nav.Link href="/encounters">Encounters</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/login">Login</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/register">Register</Nav.Link>
+      </Nav.Item>
+    </Nav>
   );
 }
 
