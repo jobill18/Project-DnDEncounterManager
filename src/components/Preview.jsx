@@ -1,16 +1,24 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLoaderData, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
 function Preview() {
-  const user = useSelector((state) => state.user);
   const { encounters } = useLoaderData();
   const [displayEnc, setDisplayEnc] = useState(encounters);
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
-  console.log(user);
+  useEffect(() => {
+    getUser();
+  });
+
+  const getUser = async () => {
+    if (!user) {
+      const res = await axios.get("/api/auth");
+      setUser(res.data.user);
+    }
+  };
 
   const encounterCards = displayEnc.map((encounter) => (
     <Row key={encounter.encounterId}>

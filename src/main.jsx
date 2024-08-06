@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import store from "./reducers/store.js";
 import App from "./App.jsx";
-import "./index.css";
+// import "./index.css";
 import {
   Route,
   RouterProvider,
@@ -21,7 +21,7 @@ import "bootstrap/dist/css/bootstrap.css";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/" element={Homepage} />
+      <Route path="/home" element={<Homepage />} />
       <Route
         path="/encounters"
         element={<Preview />}

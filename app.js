@@ -93,6 +93,12 @@ app.post("/api/user", async (req, res) => {
 
 //-------------------api endpoints that require authorization--------------------------//
 
+//session user
+app.get("/api/auth", (req, res) => {
+  const user = req.session.userId;
+  res.json({ user: user });
+});
+
 //logout
 app.post("/api/logout", loginRequired, (req, res) => {
   req.session.destroy();

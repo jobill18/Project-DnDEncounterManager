@@ -1,21 +1,31 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import DEMonsterTable from "./DEMonsterTable";
 import EditSaveEncounterButton from "./EditSaveEncounterButton";
 import EditMonsterSearchBar from "./EditMonsterSearchBar";
 import EditEncounterName from "./EditEncounterName";
-import { useSelector } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
 function DetailedView() {
-  const user = useSelector((state) => state.user);
   const { monsterEntries, encounter } = useLoaderData();
   const [isEditing, setIsEditing] = useState(false);
   const [encounterName, setEncounterName] = useState(encounter.encounterName);
   const [monsterList, setMonsterList] = useState(monsterEntries);
   const { encounterId } = encounter;
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getUser();
+  });
+
+  const getUser = async () => {
+    if (!user) {
+      const res = await axios.get("/api/auth");
+      setUser(res.data.user);
+    }
+  };
 
   const setEditMode = () => setIsEditing(true);
   const setNormalMode = async () => {
