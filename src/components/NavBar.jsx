@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 
 function NavBar() {
@@ -29,23 +29,35 @@ function NavBar() {
   };
 
   return user ? (
-    <Navbar>
+    <Navbar sticky="top" bg="primary" variant="dark">
       <Container>
-        <Navbar.Brand href="/home">DnD Encounter Manager</Navbar.Brand>
-        <Nav variant="tabs">
-          <Nav.Link href="/encounters">Encounters</Nav.Link>
+        <Navbar.Brand as={Link} to="/home">
+          DnD Encounter Manager
+        </Navbar.Brand>
+        <Nav>
+          <Nav.Link as={Link} to="/encounters">
+            Encounters
+          </Nav.Link>
           <Button onClick={handleLogout}>Log Out</Button>
         </Nav>
       </Container>
     </Navbar>
   ) : (
-    <Navbar>
+    <Navbar sticky="top" bg="primary" variant="dark">
       <Container>
-        <Navbar.Brand href="/home">DnD Encounter Manager</Navbar.Brand>
-        <Nav variant="tabs">
-          <Nav.Link href="/encounters">Encounters</Nav.Link>
-          <Nav.Link href="/login">Login</Nav.Link>
-          <Nav.Link href="/register">Register</Nav.Link>
+        <Navbar.Brand as={Link} to="/home">
+          DnD Encounter Manager
+        </Navbar.Brand>
+        <Nav>
+          <Nav.Link as={Link} to="/encounters">
+            Encounters
+          </Nav.Link>
+          <Nav.Link as={Link} to="/login">
+            Login
+          </Nav.Link>
+          <Nav.Link as={Link} to="/register">
+            Register
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>

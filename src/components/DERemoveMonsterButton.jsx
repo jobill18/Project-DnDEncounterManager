@@ -1,8 +1,9 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 function DERemoveMonsterButton({ isEditing, monsterId, removeMonster }) {
   return (
-    isEditing && <button onClick={() => removeMonster()}>Remove Monster</button>
+    isEditing && <Button onClick={() => removeMonster()}>Remove Monster</Button>
   );
 }
 

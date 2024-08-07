@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 
 function EditMonsterSearchBar({
@@ -32,7 +32,7 @@ function EditMonsterSearchBar({
         return searchTerm && name.includes(searchTerm) && name !== searchTerm;
       })
       .map((item) => (
-        <Row key={item.index}>
+        <Row key={item.index} className="px-3">
           <Col onClick={() => onSearch(item.name)} className="droColdown-row">
             {item.name}
           </Col>
@@ -62,7 +62,7 @@ function EditMonsterSearchBar({
     isEditing &&
     (!loading ? (
       <Container fluid>
-        <Row>
+        <Row className="px-3 pt-3">
           <Col>
             <input
               type="text"
@@ -71,8 +71,8 @@ function EditMonsterSearchBar({
               onChange={onChange}
             />
           </Col>
-          <Col>
-            <button onClick={() => addMonster()}>Add Monster</button>
+          <Col xs="3" className="text-center">
+            <Button onClick={() => addMonster()}>Add Monster</Button>
           </Col>
         </Row>
         <div className="dropdown">{monsterDB}</div>

@@ -56,7 +56,7 @@ function DetailedView() {
   return user && user === encounter.userId ? (
     <div>
       <Container fluid>
-        <Row>
+        <Row className="p-3">
           <Col>
             <EditEncounterName
               value={encounterName}
@@ -83,7 +83,7 @@ function DetailedView() {
   ) : (
     <div>
       <Container fluid>
-        <Row>
+        <Row className="p-3">
           <Col>
             <h2>{encounterName}</h2>
           </Col>

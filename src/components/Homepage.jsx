@@ -4,12 +4,12 @@ import { Container, Row, Col } from "react-bootstrap";
 function Homepage() {
   return (
     <Container fluid>
-      <Row>
+      <Row className="p-3 text-center">
         <Col>
-          <h3>Welcome!</h3>
+          <h1>Welcome!</h1>
         </Col>
       </Row>
-      <Row>
+      <Row className="p-3">
         <Col>
           <p>
             This is the D&D Encounter Manager, a tool for dungeon masters to

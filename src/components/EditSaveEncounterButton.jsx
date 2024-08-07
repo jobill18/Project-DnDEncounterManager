@@ -1,5 +1,5 @@
 import React from "react";
-import { Col } from "react-bootstrap";
+import { Col, Button } from "react-bootstrap";
 
 function EditSaveEncounterButton({
   isEditing,
@@ -8,14 +8,18 @@ function EditSaveEncounterButton({
   onDeleteClick,
 }) {
   return !isEditing ? (
-    <Col>
-      <button onClick={onEditClick}>Edit</button>
+    <Col xs="2">
+      <Button onClick={onEditClick}>Edit</Button>
     </Col>
   ) : (
-    <Col>
-      <button onClick={onSaveClick}>Save</button>
-      <button onClick={onDeleteClick}>Delete Encounter</button>
-    </Col>
+    <>
+      <Col xs="4">
+        <Button onClick={onDeleteClick}>Delete Encounter</Button>
+      </Col>
+      <Col xs="2">
+        <Button onClick={onSaveClick}>Save</Button>
+      </Col>
+    </>
   );
 }
 

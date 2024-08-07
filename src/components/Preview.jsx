@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLoaderData, Link } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button, Nav } from "react-bootstrap";
 
 function Preview() {
   const { encounters } = useLoaderData();
@@ -21,12 +21,16 @@ function Preview() {
   };
 
   const encounterCards = displayEnc.map((encounter) => (
-    <Row key={encounter.encounterId}>
-      <Col xs="8">
+    <Row key={encounter.encounterId} className="px-3 py-1">
+      <Col xs="10">
         <h3>{encounter.encounterName}</h3>
       </Col>
-      <Col>
-        <Link to={`/encounters/${encounter.encounterId}`}>View Details</Link>
+      <Col xs="2" className="text-center">
+        <Button variant="secondary">
+          <Nav.Link as={Link} to={`/encounters/${encounter.encounterId}`}>
+            View Details
+          </Nav.Link>
+        </Button>
       </Col>
     </Row>
   ));
@@ -44,14 +48,14 @@ function Preview() {
   return user ? (
     !isLoading ? (
       <Container fluid>
-        <Row>
-          <Col xs="8">
+        <Row className="p-3">
+          <Col xs="10">
             <h1>Encounters</h1>
           </Col>
-          <Col xs="4">
-            <button type="sumbit" onClick={addEncounter}>
+          <Col xs="2" className="text-center">
+            <Button type="sumbit" onClick={addEncounter}>
               Add Encounter
-            </button>
+            </Button>
           </Col>
         </Row>
         {encounterCards}
@@ -61,8 +65,8 @@ function Preview() {
     )
   ) : (
     <Container fluid>
-      <Row>
-        <Col xs="8">
+      <Row className="p-3">
+        <Col>
           <h1>Encounters</h1>
         </Col>
       </Row>

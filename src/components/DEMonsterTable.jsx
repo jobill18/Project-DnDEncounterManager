@@ -37,56 +37,69 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
   return (
     details &&
     (!isLoading ? (
-      <Container key={monster.monsterId}>
-        <Row>
+      <Container fluid key={monster.monsterId}>
+        <Row className="px-3 py-2">
           <Col>
             <h3>{monster.monsterName}</h3>
           </Col>
-          <Col xs="3">CR: {details.challenge_rating}</Col>
+          <Col className="fw-bold text-end">CR: </Col>
+          <Col>{details.challenge_rating}</Col>
         </Row>
-        <Row>
-          <Col>AC: {details.armor_class[0].value}</Col>
-          <Col>HP: {details.hit_points}</Col>
-          <Col>Speed: {details.speed.walk}</Col>
+        <Row className="px-3 py-1">
+          {/* <Col xs="3"></Col> */}
+          <Col xs="1" className="fw-bold text-end">
+            AC:
+          </Col>
+          <Col xs="1">{details.armor_class[0].value}</Col>
+          <Col xs="1" className="fw-bold text-end">
+            HP:
+          </Col>
+          <Col xs="1">{details.hit_points}</Col>
+          <Col xs="1" className="fw-bold text-end">
+            Speed:
+          </Col>
+          <Col xs="1">{details.speed.walk}</Col>
         </Row>
-        <Row>
-          <Col>STR</Col>
-          <Col>DEX</Col>
-          <Col>CON</Col>
-          <Col>INT</Col>
-          <Col>WIS</Col>
-          <Col>CHA</Col>
+        <Row className="px-3 py-1 fw-bold text-center">
+          {/* <Col xs="3"></Col> */}
+          <Col xs="1">STR</Col>
+          <Col xs="1">DEX</Col>
+          <Col xs="1">CON</Col>
+          <Col xs="1">INT</Col>
+          <Col xs="1">WIS</Col>
+          <Col xs="1">CHA</Col>
         </Row>
-        <Row>
-          <Col>{details.strength}</Col>
-          <Col>{details.dexterity}</Col>
-          <Col>{details.constitution}</Col>
-          <Col>{details.intelligence}</Col>
-          <Col>{details.wisdom}</Col>
-          <Col>{details.charisma}</Col>
+        <Row className="px-3 py-1 text-center">
+          {/* <Col xs="3"></Col> */}
+          <Col xs="1">{details.strength}</Col>
+          <Col xs="1">{details.dexterity}</Col>
+          <Col xs="1">{details.constitution}</Col>
+          <Col xs="1">{details.intelligence}</Col>
+          <Col xs="1">{details.wisdom}</Col>
+          <Col xs="1">{details.charisma}</Col>
         </Row>
-        <Row>
+        <Row className="px-3 py-1 fw-bold">
           <Col>Features:</Col>
         </Row>
         {details.special_abilities.map((feature) => (
-          <Row key={feature.name}>
+          <Row key={feature.name} className="px-3 py-1">
             <Col>
               {feature.name}: {feature.desc}
             </Col>
           </Row>
         ))}
-        <Row>
+        <Row className="px-3 py-1 fw-bold">
           <Col>Actions:</Col>
         </Row>
         {details.actions.map((action) => (
-          <Row key={action.name}>
+          <Row key={action.name} className="px-3 py-1">
             <Col>
               {action.name}: {action.desc}
             </Col>
           </Row>
         ))}
-        <Row>
-          <Col>
+        <Row className="px-3 py-1">
+          <Col xs="10" className="text-center">
             <DERemoveMonsterButton
               isEditing={isEditing}
               removeMonster={removeMonster}
