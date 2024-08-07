@@ -29,22 +29,30 @@ function NavBar() {
   };
 
   return user ? (
-    <Navbar sticky="top" bg="primary" variant="dark">
-      <Container>
+    <Navbar expand="md" sticky="top" bg="primary" variant="dark">
+      <Container fluid>
         <Navbar.Brand as={Link} to="/home">
           DnD Encounter Manager
         </Navbar.Brand>
-        <Nav>
-          <Nav.Link as={Link} to="/encounters">
-            Encounters
-          </Nav.Link>
-          <Button onClick={handleLogout}>Log Out</Button>
-        </Nav>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="justify-content-end"
+        />
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+          <Nav>
+            <Nav.Link as={Link} to="/encounters" className="text-end">
+              Encounters
+            </Nav.Link>
+            <Button className="text-end" onClick={handleLogout}>
+              Log Out
+            </Button>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   ) : (
     <Navbar sticky="top" bg="primary" variant="dark">
-      <Container>
+      <Container fluid>
         <Navbar.Brand as={Link} to="/home">
           DnD Encounter Manager
         </Navbar.Brand>

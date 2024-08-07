@@ -3,13 +3,13 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function Homepage() {
   return (
-    <Container fluid>
-      <Row className="p-3 text-center">
+    <Container>
+      <Row xs="10" lg="8" xl="6" className="p-3 text-center">
         <Col>
           <h1>Welcome!</h1>
         </Col>
       </Row>
-      <Row className="p-3">
+      <Row xs="10" lg="8" xl="6" className="p-3">
         <Col>
           <p>
             This is the D&D Encounter Manager, a tool for dungeon masters to

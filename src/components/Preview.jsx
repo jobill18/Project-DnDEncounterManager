@@ -22,11 +22,11 @@ function Preview() {
 
   const encounterCards = displayEnc.map((encounter) => (
     <Row key={encounter.encounterId} className="px-3 py-1">
-      <Col xs="10">
+      <Col>
         <h3>{encounter.encounterName}</h3>
       </Col>
-      <Col xs="2" className="text-center">
-        <Button variant="secondary">
+      <Col className="text-center">
+        <Button variant="success">
           <Nav.Link as={Link} to={`/encounters/${encounter.encounterId}`}>
             View Details
           </Nav.Link>
@@ -49,10 +49,10 @@ function Preview() {
     !isLoading ? (
       <Container fluid>
         <Row className="p-3">
-          <Col xs="10">
+          <Col>
             <h1>Encounters</h1>
           </Col>
-          <Col xs="2" className="text-center">
+          <Col className="text-center">
             <Button type="sumbit" onClick={addEncounter}>
               Add Encounter
             </Button>
