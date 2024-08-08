@@ -3,10 +3,12 @@ import React from "react";
 import DERemoveMonsterButton from "./DERemoveMonsterButton";
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import DEHealthTracker from "./DEHealthTracker";
+import DEAttackRoll from "./DEAttackRoll";
 
 function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
-  const [details, setDetails] = useState(null);
   const { monsterName, monsterId, encounterId } = monster;
+  const [details, setDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const removeMonster = async () => {
@@ -39,44 +41,41 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
     (!isLoading ? (
       <Container fluid key={monster.monsterId}>
         <Row className="px-3 py-2">
-          <Col>
-            <h3>{monster.monsterName}</h3>
+          <Col className="h1">{monster.monsterName}</Col>
+          <Col xs="1" className="fw-bold text-end">
+            CR:{" "}
           </Col>
-          <Col className="fw-bold text-end">CR: </Col>
-          <Col>{details.challenge_rating}</Col>
+          <Col xs="1">{details.challenge_rating}</Col>
         </Row>
         <Row className="px-3 py-1">
-          {/* <Col xs="3"></Col> */}
-          <Col xs="1" className="fw-bold text-end">
-            AC:
-          </Col>
-          <Col xs="1">{details.armor_class[0].value}</Col>
-          <Col xs="1" className="fw-bold text-end">
-            HP:
-          </Col>
-          <Col xs="1">{details.hit_points}</Col>
-          <Col xs="1" className="fw-bold text-end">
-            Speed:
-          </Col>
-          <Col xs="1">{details.speed.walk}</Col>
+          <DEHealthTracker
+            maxHp={details.hit_points}
+            monster={monster.monsterName}
+          />
+        </Row>
+        <Row className="px-3 py-1">
+          <Col className="fw-bold text-end">AC:</Col>
+          <Col>{details.armor_class[0].value}</Col>
+          <Col className="fw-bold text-end">HP:</Col>
+          <Col>{details.hit_points}</Col>
+          <Col className="fw-bold text-end">Speed:</Col>
+          <Col>{details.speed.walk}</Col>
         </Row>
         <Row className="px-3 py-1 fw-bold text-center">
-          {/* <Col xs="3"></Col> */}
-          <Col xs="1">STR</Col>
-          <Col xs="1">DEX</Col>
-          <Col xs="1">CON</Col>
-          <Col xs="1">INT</Col>
-          <Col xs="1">WIS</Col>
-          <Col xs="1">CHA</Col>
+          <Col>STR</Col>
+          <Col>DEX</Col>
+          <Col>CON</Col>
+          <Col>INT</Col>
+          <Col>WIS</Col>
+          <Col>CHA</Col>
         </Row>
         <Row className="px-3 py-1 text-center">
-          {/* <Col xs="3"></Col> */}
-          <Col xs="1">{details.strength}</Col>
-          <Col xs="1">{details.dexterity}</Col>
-          <Col xs="1">{details.constitution}</Col>
-          <Col xs="1">{details.intelligence}</Col>
-          <Col xs="1">{details.wisdom}</Col>
-          <Col xs="1">{details.charisma}</Col>
+          <Col>{details.strength}</Col>
+          <Col>{details.dexterity}</Col>
+          <Col>{details.constitution}</Col>
+          <Col>{details.intelligence}</Col>
+          <Col>{details.wisdom}</Col>
+          <Col>{details.charisma}</Col>
         </Row>
         <Row className="px-3 py-1 fw-bold">
           <Col>Features:</Col>
@@ -92,11 +91,15 @@ function DEMonsterTable({ monster, isEditing, setMonsterList, monsterList }) {
           <Col>Actions:</Col>
         </Row>
         {details.actions.map((action) => (
-          <Row key={action.name} className="px-3 py-1">
-            <Col>
-              {action.name}: {action.desc}
-            </Col>
-          </Row>
+          <div key={action.name}>
+            <Row className="px-3 py-1">
+              <Col>
+                {action.name}: {action.desc}
+              </Col>
+            </Row>
+
+            <DEAttackRoll bonus={action.attack_bonus} />
+          </div>
         ))}
         <Row className="px-3 py-1">
           <Col xs="10" className="text-center">

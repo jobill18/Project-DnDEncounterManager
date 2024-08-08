@@ -16,7 +16,7 @@ import LoginForm from "./components/LoginForm.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
 import Homepage from "./components/Homepage.jsx";
 import { Provider } from "react-redux";
-import "bootstrap/dist/css/bootstrap.css";
+import "../scss/custom.scss";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

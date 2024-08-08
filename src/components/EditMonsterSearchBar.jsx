@@ -43,19 +43,27 @@ function EditMonsterSearchBar({
   const addMonster = async () => {
     setLoading(true);
     const monster = monsterData.results.filter((item) => {
-      return item.name === value;
+      return item.name.toLowerCase() === value.toLowerCase();
     });
-    console.log(monster);
-    const newMonster = await axios.post(
-      `/api/encounters/${encounter.encounterId}`,
-      {
-        monsterName: monster[0].name,
-        monsterUrl: `https://www.dnd5eapi.co${monster[0].url}`,
-      }
-    );
-    setValue("");
-    setMonsterList([...monsterList, newMonster.data]);
-    setLoading(false);
+    console.log(monster[0]);
+
+    if (monster[0]) {
+      const newMonster = await axios.post(
+        `/api/encounters/${encounter.encounterId}`,
+        {
+          monsterName: monster[0].name,
+          monsterUrl: `https://www.dnd5eapi.co${monster[0].url}`,
+        }
+      );
+      setValue("");
+      setMonsterList([...monsterList, newMonster.data]);
+      setLoading(false);
+    } else {
+      alert(
+        `Creature with name "${value}" was not found. Please click on the name in the dropdown of the creature you are searching for before adding the creature.`
+      );
+      setLoading(false);
+    }
   };
 
   return (

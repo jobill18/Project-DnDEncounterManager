@@ -26,7 +26,7 @@ function Preview() {
         <h3>{encounter.encounterName}</h3>
       </Col>
       <Col className="text-center">
-        <Button variant="success">
+        <Button>
           <Nav.Link as={Link} to={`/encounters/${encounter.encounterId}`}>
             View Details
           </Nav.Link>

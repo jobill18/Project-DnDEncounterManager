@@ -1,15 +1,16 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
+import logo from "../assets/logo-red.png";
 
 function Homepage() {
   return (
-    <Container>
-      <Row xs="10" lg="8" xl="6" className="p-3 text-center">
+    <Container fluid>
+      <Row className="p-3 text-center">
         <Col>
           <h1>Welcome!</h1>
         </Col>
       </Row>
-      <Row xs="10" lg="8" xl="6" className="p-3">
+      <Row className="p-3">
         <Col>
           <p>
             This is the D&D Encounter Manager, a tool for dungeon masters to
@@ -19,6 +20,16 @@ function Homepage() {
             your own encounters and choose which monsters to include. Happy
             adventuring!
           </p>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="text-center">
+          <Image
+            src={logo}
+            alt="Encounter Manager logo"
+            roundedCircle
+            className="w-75"
+          />
         </Col>
       </Row>
     </Container>

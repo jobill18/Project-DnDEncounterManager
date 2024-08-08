@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { Container, Navbar, Nav, Button, Image } from "react-bootstrap";
+import logo from "../assets/logo-white.png";
 
 function NavBar() {
   // const user = useSelector((state) => state.user);
@@ -31,16 +32,13 @@ function NavBar() {
   return user ? (
     <Navbar expand="md" sticky="top" bg="primary" variant="dark">
       <Container fluid>
-        <Navbar.Brand as={Link} to="/home">
-          DnD Encounter Manager
+        <Navbar.Brand as={Link} to="/home" className="w-15">
+          <Image src={logo} roundedCircle width={35} fluid />
         </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          className="justify-content-end"
-        />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Nav>
-            <Nav.Link as={Link} to="/encounters" className="text-end">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="justify-content-end ms-auto text-end">
+            <Nav.Link as={Link} to="/encounters">
               Encounters
             </Nav.Link>
             <Button className="text-end" onClick={handleLogout}>
@@ -51,22 +49,25 @@ function NavBar() {
       </Container>
     </Navbar>
   ) : (
-    <Navbar sticky="top" bg="primary" variant="dark">
+    <Navbar expand="md" sticky="top" bg="primary" variant="dark">
       <Container fluid>
         <Navbar.Brand as={Link} to="/home">
-          DnD Encounter Manager
+          <Image src={logo} roundedCircle width={35} fluid />
         </Navbar.Brand>
-        <Nav>
-          <Nav.Link as={Link} to="/encounters">
-            Encounters
-          </Nav.Link>
-          <Nav.Link as={Link} to="/login">
-            Login
-          </Nav.Link>
-          <Nav.Link as={Link} to="/register">
-            Register
-          </Nav.Link>
-        </Nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="justify-content-end ms-auto text-end">
+            <Nav.Link as={Link} to="/encounters">
+              Encounters
+            </Nav.Link>
+            <Nav.Link as={Link} to="/login">
+              Login
+            </Nav.Link>
+            <Nav.Link as={Link} to="/register">
+              Register
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

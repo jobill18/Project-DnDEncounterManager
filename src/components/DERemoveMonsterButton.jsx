@@ -3,7 +3,11 @@ import { Button } from "react-bootstrap";
 
 function DERemoveMonsterButton({ isEditing, monsterId, removeMonster }) {
   return (
-    isEditing && <Button onClick={() => removeMonster()}>Remove Monster</Button>
+    isEditing && (
+      <Button variant="warning" onClick={() => removeMonster()}>
+        Remove Monster
+      </Button>
+    )
   );
 }
 

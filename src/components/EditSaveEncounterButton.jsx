@@ -14,10 +14,14 @@ function EditSaveEncounterButton({
   ) : (
     <>
       <Col xs="4">
-        <Button onClick={onDeleteClick}>Delete Encounter</Button>
+        <Button onClick={onDeleteClick} variant="warning">
+          Delete Encounter
+        </Button>
       </Col>
       <Col xs="2">
-        <Button onClick={onSaveClick}>Save</Button>
+        <Button onClick={onSaveClick} variant="success">
+          Save
+        </Button>
       </Col>
     </>
   );
